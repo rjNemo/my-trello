@@ -1,16 +1,23 @@
-import React from "react";
-import Head from "next/head";
-import styles from "../styles/Home.module.css";
+import React from 'react';
+import Head from 'next/head';
 
-const MainLayout = ({ children }) => {
+import {Divider, Row, Typography} from 'antd';
+const {Title} = Typography;
+
+import styles from '../styles/Home.module.css';
+
+const MainLayout = ({children}) => {
   return (
-    <div className={styles.container}>
+    <Row>
       <Head>
         <title>My Trello</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <main className={styles.main}>{children}</main>
+      <main style={{padding: 16, width: '100%'}}>
+        <Title> My Trello</Title>
+        <Divider />
+        {children}
+      </main>
 
       <footer className={styles.footer}>
         <a
@@ -18,11 +25,11 @@ const MainLayout = ({ children }) => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{" "}
+          Powered by{' '}
           <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
         </a>
       </footer>
-    </div>
+    </Row>
   );
 };
 
