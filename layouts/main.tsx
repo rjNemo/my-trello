@@ -6,7 +6,7 @@ const {Title} = Typography;
 
 import styles from '../styles/Home.module.css';
 
-const MainLayout = ({children}) => {
+const MainLayout = (props: any) => {
   return (
     <Row>
       <Head>
@@ -16,7 +16,7 @@ const MainLayout = ({children}) => {
       <main style={{padding: 16, width: '100%'}}>
         <Title> My Trello</Title>
         <Divider />
-        {children}
+        {props.children}
       </main>
 
       <footer className={styles.footer}>
