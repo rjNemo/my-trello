@@ -2,7 +2,7 @@ import React, {FC, useRef} from 'react';
 import {useDispatch} from 'react-redux';
 import {Card, Input, List, Typography} from 'antd';
 
-import {addTaskToList, toggleValidateTaskByID} from '../store/board';
+import {addTaskToList, storeValidation} from '../store/board/thunks';
 import {BoardType} from '../store/board/types';
 
 import TaskValidationIcon from './TaskValidationIcon';
@@ -11,18 +11,17 @@ const Listings: FC<BoardType> = ({lists, id: bid}) => {
   const newTaskName = useRef<string>('');
   const dispatch = useDispatch();
 
-  const handleSubmit = (lid: number) => (
+  const handleSubmit = (lid: string) => (
     e: React.FormEvent<HTMLFormElement>,
   ) => {
     e.preventDefault();
     dispatch(addTaskToList({bid, lid, taskName: newTaskName.current}));
   };
 
-  const toggleValidation = (taskID: number, listID: number) => (
+  const toggleValidation = (taskID: string, listID: string) => (
     e: React.MouseEvent,
   ) => {
-    dispatch(toggleValidateTaskByID({boardID: bid, listID, taskID}));
-    console.log('clicked');
+    dispatch(storeValidation({boardID: bid, listID, taskID}));
   };
 
   return (

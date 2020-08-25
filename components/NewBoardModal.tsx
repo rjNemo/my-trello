@@ -1,7 +1,7 @@
 import React, {useState, FC} from 'react';
 
 import {useDispatch} from 'react-redux';
-import {newBoard} from '../store/board';
+import {createOneBoard} from '../store/board/thunks';
 
 import {Modal, Button, Input, Row} from 'antd';
 
@@ -34,7 +34,7 @@ const NewBoardModal: FC = () => {
       confirmLoading: true,
     }));
 
-    dispatch(newBoard(state.boardName));
+    dispatch(createOneBoard(state.boardName));
 
     setTimeout(() => {
       setState(initModalState);

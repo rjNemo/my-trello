@@ -1,7 +1,7 @@
 import React, {useState, FC} from 'react';
 
 import {useDispatch} from 'react-redux';
-import {addListToBoard} from '../store/board';
+import {addListToBoard, fetchAllBoards} from '../store/board/thunks';
 
 import {Modal, Button, Input, Row} from 'antd';
 
@@ -19,7 +19,7 @@ const initModalState: ModalState = {
   boardName: '',
 };
 
-const NewListModal: FC<{boardID: number}> = ({boardID}) => {
+const NewListModal: FC<{boardID: string}> = ({boardID}) => {
   const [state, setState] = useState<ModalState>(initModalState);
   const dispatch = useDispatch();
 
@@ -40,6 +40,7 @@ const NewListModal: FC<{boardID: number}> = ({boardID}) => {
         title: state.boardName,
       }),
     );
+    dispatch(fetchAllBoards());
 
     setTimeout(() => {
       setState(initModalState);

@@ -1,59 +1,52 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {v4} from 'uuid';
 
-import {BoardSliceState, BoardType, ListType} from './types';
+import {
+  addListToBoard,
+  createOneBoard,
+  fetchAllBoards,
+  addTaskToList,
+  storeValidation,
+} from './thunks';
+import {BoardSliceState, BoardType, ListType, TaskParamsType} from './types';
 
 const initialState: BoardSliceState = {
-  boards: [
-    {
-      title: '1st',
-      id: 0,
-      lists: [
-        {
-          id: 0,
-          title: 'First thing to do',
-          tasks: [
-            {id: 0, value: 'First Task', isDone: false},
-            {id: 1, value: 'Second Task', isDone: true},
-          ],
-        },
-      ],
-    },
-    {title: '2nd', id: 1, lists: []},
-  ],
+  boards: [],
 };
 
 const boardSlice = createSlice({
   name: 'boards',
   initialState,
   reducers: {
-    newBoard: (state, action: PayloadAction<string>) => {
+    loadAll: (state, action: PayloadAction<BoardType[]>) => {
+      const boards = action.payload;
+      return {...state, boards};
+    },
+    addOne: (state, action: PayloadAction<string>) => {
       const newBoard: BoardType = {
         title: action.payload,
-        id: state.boards.length,
+        id: state.boards.length.toString(),
         lists: [],
       };
       return {...state, boards: [...state.boards, newBoard]};
     },
-    addListToBoard: (
-      state,
-      action: PayloadAction<{bid: number; title: string}>,
-    ) => {
+    addList: (state, action: PayloadAction<{bid: string; title: string}>) => {
       const {bid, title} = action.payload;
       const board = state.boards.find(b => b.id === bid);
 
       if (!board) return state;
 
       const newList: ListType = {
-        id: board.lists.length,
+        id: v4(),
         title,
         tasks: [],
       };
 
       board.lists.push(newList);
     },
-    addTaskToList: (
+    addTask: (
       state,
-      action: PayloadAction<{bid: number; lid: number; taskName: string}>,
+      action: PayloadAction<{bid: string; lid: string; taskName: string}>,
     ) => {
       const {bid, taskName, lid} = action.payload;
 
@@ -64,16 +57,13 @@ const boardSlice = createSlice({
       if (!list) return state;
 
       const newTask = {
-        id: list.tasks.length,
+        id: v4(),
         value: taskName,
         isDone: false,
       };
       list.tasks.push(newTask);
     },
-    toggleValidateTaskByID: (
-      state,
-      action: PayloadAction<{taskID: number; listID: number; boardID: number}>,
-    ) => {
+    toggleValidateTaskByID: (state, action: PayloadAction<TaskParamsType>) => {
       const {boardID, listID, taskID} = action.payload;
 
       const board = state.boards.find(b => b.id === boardID);
@@ -88,12 +78,49 @@ const boardSlice = createSlice({
       task.isDone = !task.isDone;
     },
   },
+  extraReducers: {
+    [fetchAllBoards.fulfilled.toString()]: (
+      state,
+      action: PayloadAction<BoardType[]>,
+    ) => {
+      state.boards = action.payload;
+    },
+    [createOneBoard.fulfilled.toString()]: (
+      state,
+      action: PayloadAction<BoardType>,
+    ) => {
+      const newBoard = action.payload;
+      return {...state, boards: [...state.boards, newBoard]};
+    },
+    [addListToBoard.fulfilled.toString()]: (
+      state,
+      action: PayloadAction<BoardType>,
+    ) => {
+      const newBoard = action.payload;
+      return {...state, boards: [...state.boards, newBoard]};
+    },
+    [addTaskToList.fulfilled.toString()]: (
+      state,
+      action: PayloadAction<BoardType>,
+    ) => {
+      const newBoard = action.payload;
+      return {...state, boards: [...state.boards, newBoard]};
+    },
+    [storeValidation.fulfilled.toString()]: (
+      state,
+      action: PayloadAction<BoardType>,
+    ) => {
+      const newBoard = action.payload;
+      return {...state, boards: [...state.boards, newBoard]};
+    },
+  },
 });
 
 export const {
-  newBoard,
-  addListToBoard,
-  addTaskToList,
+  loadAll,
+  addOne,
+  addList,
+  addTask,
   toggleValidateTaskByID,
 } = boardSlice.actions;
 

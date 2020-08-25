@@ -1,5 +1,7 @@
 # My Trello
 
+[See in Live](https://my-trello.onrender.com/)
+
 ## Pages
 
 ### Home page
@@ -15,7 +17,7 @@
 
 #### Lists
 
-- [ ] Add task
+- [x] Add task
 - [ ] Delete task
-- [ ] Complete task
+- [x] Complete task
 - [ ] Drag and drop task

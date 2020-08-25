@@ -3,19 +3,25 @@ export type BoardSliceState = {
 };
 
 export type ListType = {
-  id: number;
+  id: string;
   title: string;
   tasks: TaskType[];
 };
 
 export type TaskType = {
-  id: number;
+  id: string;
   value: string;
   isDone: boolean;
 };
 
 export type BoardType = {
+  id: string;
   title: string;
-  id: number;
   lists: ListType[];
 };
+
+export type AddToListType = {bid: string; title: string};
+
+export type AddTaskToListType = {bid: string; lid: string; taskName: string};
+
+export type TaskParamsType = {taskID: string; listID: string; boardID: string};

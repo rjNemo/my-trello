@@ -1,4 +1,4 @@
-import {configureStore} from '@reduxjs/toolkit';
+import {Action, configureStore, ThunkAction} from '@reduxjs/toolkit';
 
 import boardReducer from './board';
 
@@ -12,5 +12,9 @@ const store = configureStore({
 
 /** Store State Type */
 export type StoreState = ReturnType<typeof store.getState>;
+
+export type AppDispatch = typeof store.dispatch;
+
+export type AppThunk = ThunkAction<void, StoreState, unknown, Action<string>>;
 
 export default store;

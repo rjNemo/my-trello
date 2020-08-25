@@ -19,7 +19,7 @@ const renderBody = (bid: string | string[] | undefined): JSX.Element => {
 
   if (!bid) return errorComponent;
 
-  const id = typeof bid === 'string' ? parseInt(bid) : parseInt(bid[0]);
+  const id = typeof bid !== 'string' ? bid[0] : bid;
 
   const board = useSelector(selectBoardByID(id));
 
