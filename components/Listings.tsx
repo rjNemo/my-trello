@@ -31,7 +31,7 @@ const Listings: FC<BoardType> = ({lists, id: bid}) => {
         dataSource={lists}
         renderItem={list => (
           <List.Item>
-            <Card title={list.title}>
+            <Card title={list.title} hoverable>
               <form onSubmit={handleSubmit(list.id)}>
                 <Input
                   placeholder="New Task"

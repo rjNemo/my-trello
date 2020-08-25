@@ -19,5 +19,6 @@
 
 - [x] Add task
 - [ ] Delete task
+- [ ] Validate task
 - [x] Complete task
 - [ ] Drag and drop task

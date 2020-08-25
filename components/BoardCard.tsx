@@ -11,7 +11,7 @@ const {Title} = Typography;
 const BoardCard: FC<BoardType> = ({title, id}) => (
   <Link href="/boards/[bid]" as={`/boards/${id}`}>
     <a>
-      <Card>
+      <Card hoverable>
         <Title level={3}>{title}</Title>
       </Card>
     </a>
