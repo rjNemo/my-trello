@@ -16,7 +16,7 @@ export default function Home() {
   }, [fetchAllBoards, dispatch]);
 
   return (
-    <MainLayout>
+    <MainLayout title="My Trello">
       <NewBoardModal />
       <BoardList />
     </MainLayout>

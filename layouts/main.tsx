@@ -1,4 +1,4 @@
-import React from 'react';
+import {FC} from 'react';
 import Head from 'next/head';
 
 import {Divider, Row, Typography} from 'antd';
@@ -6,17 +6,17 @@ const {Title} = Typography;
 
 import styles from '../styles/Home.module.css';
 
-const MainLayout = (props: any) => {
+const MainLayout: FC<{title: string}> = ({title, children}) => {
   return (
     <Row>
       <Head>
-        <title>My Trello</title>
+        <title>{title}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main style={{padding: 16, width: '100%'}}>
-        <Title> My Trello</Title>
+        <Title>{title}</Title>
         <Divider />
-        {props.children}
+        {children}
       </main>
 
       <footer className={styles.footer}>

@@ -1,4 +1,3 @@
-import React from 'react';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
 
@@ -7,8 +6,8 @@ import {selectBoardByID} from '../../store/board/selectors';
 
 import MainLayout from '../../layouts/main';
 
-import {Typography} from 'antd';
-const {Title, Text} = Typography;
+import {Button, Typography} from 'antd';
+const {Title} = Typography;
 import {HomeOutlined} from '@ant-design/icons';
 
 import NewListModal from '../../components/NewListModal';
@@ -39,12 +38,9 @@ const Board = () => {
   const {bid} = router.query;
 
   return (
-    <MainLayout>
+    <MainLayout title={`My Trello`}>
       <Link href="/">
-        <a>
-          <HomeOutlined />
-          <Text> Go Back Home</Text>
-        </a>
+        <Button icon={<HomeOutlined />}>Go Back Home</Button>
       </Link>
       {renderBody(bid)}
     </MainLayout>
