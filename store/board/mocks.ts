@@ -6,11 +6,11 @@ export const mockBoards: BoardType[] = [
     id: '0',
     lists: [
       {
-        id: 0,
+        id: '0',
         title: 'First thing to do',
         tasks: [
-          {id: 0, value: 'First Task', isDone: false},
-          {id: 1, value: 'Second Task', isDone: true},
+          {id: '0', value: 'First Task', isDone: false},
+          {id: '1', value: 'Second Task', isDone: true},
         ],
       },
     ],
